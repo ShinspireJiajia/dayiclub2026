@@ -1,7 +1,11 @@
 /**
- * 圖片素材尺寸標註工具
+ * 圖片素材尺寸標註工具 v2
  * 使用 Playwright 自動擷取每個頁面的截圖，並標註所有圖片的顯示尺寸
- * 產出結果放在 image-specs/ 資料夾
+ * - 排除裝飾性背景圖（picture-bg, content-bg-bottom, deco 等）
+ * - 排除 SVG 圖示、箭頭圖示
+ * - 排除「相關文章」區塊的重複卡片
+ * - 同規格圖片去重，顯示「×N」
+ * - 捲動頁面觸發動畫，確保所有圖片可見
  */
 const { chromium } = require('playwright');
 const path = require('path');
@@ -11,7 +15,7 @@ const PROJECT_DIR = __dirname;
 const OUTPUT_DIR = path.join(PROJECT_DIR, 'image-specs');
 const PAGES_DIR = path.join(PROJECT_DIR, 'pages');
 
-// 頁面清單及中文名稱
+// ===== 頁面清單 =====
 const PAGE_LIST = [
   { file: 'home.html', name: '首頁' },
   { file: 'room-list.html', name: '客房列表' },
@@ -37,17 +41,34 @@ const PAGE_LIST = [
   { file: 'privacy.html', name: '隱私政策' },
 ];
 
-// 配色方案
+// ===== 排除規則 =====
+// 依檔名排除（裝飾性背景 / 重複紋理 / 箭頭）
+const EXCLUDE_FILENAMES = [
+  'content-bg-bottom.jpg',
+  'picture-bg.jpg',
+  'deco-bg.png',
+  'deco-image.jpg',
+  'arrow-left.png',
+  'arrow-right.png',
+  'gym-philosophy-bg-bottom.jpg',
+  'environment-content-bg.jpg',
+];
+
+// 依容器 class 排除（相關文章區塊 / 裝飾疊圖）
+const EXCLUDE_CLASSES = [
+  'article-news-card-image',   // 文章底部「延伸閱讀」，與 news 頁重複
+  'gym-photo-front-inner',     // 健身理念覆蓋裝飾照片
+];
+
+// 配色
 const COLORS = {
-  imgBorder: 'rgba(0, 150, 255, 0.8)',        // 藍色 - <img> 圖片
-  bgBorder: 'rgba(255, 100, 0, 0.85)',         // 橘色 - 背景圖片
-  labelBg: 'rgba(0, 120, 220, 0.92)',          // 藍色標籤背景
-  bgLabelBg: 'rgba(220, 80, 0, 0.92)',         // 橘色標籤背景
-  labelText: '#FFFFFF',
+  border: 'rgba(0, 150, 255, 0.8)',
+  labelBg: 'rgba(0, 120, 220, 0.92)',
+  dupBorder: 'rgba(0, 150, 255, 0.35)',
+  dupLabelBg: 'rgba(0, 120, 220, 0.5)',
 };
 
 async function main() {
-  // 建立輸出資料夾
   if (!fs.existsSync(OUTPUT_DIR)) {
     fs.mkdirSync(OUTPUT_DIR, { recursive: true });
   }
@@ -73,36 +94,63 @@ async function main() {
     try {
       const fileUrl = `file:///${filePath.replace(/\\/g, '/')}`;
       await page.goto(fileUrl, { waitUntil: 'networkidle', timeout: 30000 });
+      await page.waitForTimeout(800);
 
-      // 等待所有圖片載入
-      await page.waitForTimeout(1500);
+      // ===== 1. 捲動頁面觸發 IntersectionObserver 動畫 =====
+      await page.evaluate(async () => {
+        const totalHeight = document.body.scrollHeight;
+        const step = 400;
+        for (let y = 0; y <= totalHeight; y += step) {
+          window.scrollTo(0, y);
+          await new Promise(r => setTimeout(r, 80));
+        }
+        await new Promise(r => setTimeout(r, 400));
+        window.scrollTo(0, 0);
+        await new Promise(r => setTimeout(r, 200));
+      });
 
-      // 收集圖片資訊 + 注入標註 overlay
-      const imageData = await page.evaluate((colors) => {
+      // ===== 2. 強制所有動畫元素可見 =====
+      await page.evaluate(() => {
+        document.querySelectorAll('.fade-in-up, .fade-in, .fade-in-left, .fade-in-right, [class*="fade"]').forEach(el => {
+          el.classList.add('is-visible');
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+          el.style.transition = 'none';
+        });
+        // 展開 overflow:hidden 的輪播 / 格線容器，確保圖片可見
+        document.querySelectorAll('.swiper-wrapper, .carousel-wrapper, .gallery-wrapper').forEach(el => {
+          el.style.overflow = 'visible';
+        });
+      });
+      await page.waitForTimeout(300);
+
+      // ===== 3. 收集圖片（含過濾） =====
+      const rawImages = await page.evaluate((config) => {
+        const { excludeFiles, excludeClasses } = config;
         const results = [];
-        let index = 0;
 
-        // ====== 1. 處理所有 <img> 標籤 ======
-        const imgs = document.querySelectorAll('img');
-        imgs.forEach((img) => {
+        document.querySelectorAll('img').forEach((img) => {
           const rect = img.getBoundingClientRect();
-          const computedStyle = window.getComputedStyle(img);
+          const cs = window.getComputedStyle(img);
 
-          // 跳過隱藏 / 極小 / SVG 內嵌圖
+          // 跳過極小 / 隱藏
           if (rect.width < 20 || rect.height < 10) return;
-          if (computedStyle.display === 'none' || computedStyle.visibility === 'hidden') return;
-          if (computedStyle.opacity === '0') return;
+          if (cs.display === 'none' || cs.visibility === 'hidden') return;
+          if (cs.opacity === '0') return;
 
-          const w = Math.round(rect.width);
-          const h = Math.round(rect.height);
           const src = img.getAttribute('src') || '';
-          const alt = img.getAttribute('alt') || '';
-          const objectFit = computedStyle.objectFit || 'fill';
+          const filename = src.split('/').pop().toLowerCase();
 
-          // 取得最近的有意義的 class
+          // 排除 SVG
+          if (filename.endsWith('.svg')) return;
+
+          // 排除指定檔名
+          if (excludeFiles.includes(filename)) return;
+
+          // 取得最近的有意義的容器 class
           let containerClass = '';
           let el = img.parentElement;
-          for (let i = 0; i < 4 && el; i++) {
+          for (let i = 0; i < 5 && el; i++) {
             if (el.className && typeof el.className === 'string' && el.className.trim()) {
               containerClass = el.className.trim().split(/\s+/)[0];
               break;
@@ -110,232 +158,191 @@ async function main() {
             el = el.parentElement;
           }
 
+          // 排除指定容器 class
+          if (excludeClasses.includes(containerClass)) return;
+
+          const w = Math.round(rect.width);
+          const h = Math.round(rect.height);
+          const objectFit = cs.objectFit || 'fill';
           const scrollY = window.scrollY;
 
           results.push({
-            type: 'img',
-            index: index++,
             width: w,
             height: h,
             top: rect.top + scrollY,
             left: rect.left,
             src: src.split('/').pop(),
-            alt,
             objectFit,
             containerClass,
             recommend2x: `${w * 2} × ${h * 2}`,
           });
         });
 
-        // ====== 2. 處理背景圖片 ======
-        const allElements = document.querySelectorAll('*');
-        allElements.forEach((el) => {
-          const computedStyle = window.getComputedStyle(el);
-          const bgImage = computedStyle.backgroundImage;
-          if (!bgImage || bgImage === 'none') return;
-          if (!bgImage.includes('url(')) return;
-          // 跳過漸變
-          if (bgImage.startsWith('linear-gradient') || bgImage.startsWith('radial-gradient')) return;
-
-          const rect = el.getBoundingClientRect();
-          if (rect.width < 30 || rect.height < 20) return;
-          if (computedStyle.display === 'none' || computedStyle.visibility === 'hidden') return;
-
-          const w = Math.round(rect.width);
-          const h = Math.round(rect.height);
-          const bgSize = computedStyle.backgroundSize;
-
-          // 取得 URL
-          const urlMatch = bgImage.match(/url\(["']?(.+?)["']?\)/);
-          const bgUrl = urlMatch ? urlMatch[1].split('/').pop() : '';
-
-          // 跳過極小的重複圖案
-          if (bgSize === '24px 24px' || bgSize === '48px 48px') return;
-
-          let containerClass = '';
-          if (el.className && typeof el.className === 'string' && el.className.trim()) {
-            containerClass = el.className.trim().split(/\s+/)[0];
-          }
-
-          const scrollY = window.scrollY;
-
-          results.push({
-            type: 'bg',
-            index: index++,
-            width: w,
-            height: h,
-            top: rect.top + scrollY,
-            left: rect.left,
-            src: bgUrl,
-            bgSize,
-            containerClass,
-            recommend2x: `${w * 2} × ${h * 2}`,
-          });
-        });
-
         return results;
-      }, COLORS);
+      }, {
+        excludeFiles: EXCLUDE_FILENAMES,
+        excludeClasses: EXCLUDE_CLASSES,
+      });
 
-      // 注入視覺標註到頁面上
+      // ===== 4. 去重：同 containerClass + 同尺寸 → 保留第一個，記錄數量 =====
+      const groupMap = new Map();
+      const uniqueImages = [];
+
+      for (const img of rawImages) {
+        const key = `${img.containerClass}|${img.width}|${img.height}`;
+        if (groupMap.has(key)) {
+          const group = groupMap.get(key);
+          group.count++;
+          group.allPositions.push({ top: img.top, left: img.left, width: img.width, height: img.height });
+        } else {
+          const group = {
+            image: img,
+            count: 1,
+            allPositions: [{ top: img.top, left: img.left, width: img.width, height: img.height }],
+          };
+          groupMap.set(key, group);
+          uniqueImages.push(group);
+        }
+      }
+
+      // 編號
+      uniqueImages.forEach((g, i) => g.idx = i + 1);
+
+      // 收集所有標註位置（含重複項，但標同一個編號）
+      const allAnnotations = [];
+      for (const group of uniqueImages) {
+        for (let p = 0; p < group.allPositions.length; p++) {
+          allAnnotations.push({
+            ...group.allPositions[p],
+            idx: group.idx,
+            isDup: p > 0,
+            src: p === 0 ? group.image.src : '',
+          });
+        }
+      }
+
+      const totalCount = rawImages.length;
+      console.log(`  篩選後: ${totalCount} 張 → ${uniqueImages.length} 種規格（去重）`);
+
+      // ===== 5. 注入標註 overlay =====
       await page.evaluate((data) => {
-        const { images, colors } = data;
+        const { annotations, colors } = data;
 
-        // 建立標註容器
         const overlay = document.createElement('div');
         overlay.id = 'image-spec-overlay';
         overlay.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:0;pointer-events:none;z-index:99999;';
         document.body.appendChild(overlay);
 
-        images.forEach((img, idx) => {
-          const isImg = img.type === 'img';
-          const borderColor = isImg ? colors.imgBorder : colors.bgBorder;
-          const labelBg = isImg ? colors.labelBg : colors.bgLabelBg;
+        annotations.forEach((a) => {
+          const borderColor = a.isDup ? colors.dupBorder : colors.border;
+          const labelBg = a.isDup ? colors.dupLabelBg : colors.labelBg;
 
-          // 邊框高亮
+          // 邊框
           const border = document.createElement('div');
           border.style.cssText = `
-            position: absolute;
-            top: ${img.top}px;
-            left: ${img.left}px;
-            width: ${img.width}px;
-            height: ${img.height}px;
-            border: 3px solid ${borderColor};
-            box-sizing: border-box;
-            pointer-events: none;
-            z-index: 99999;
+            position:absolute; top:${a.top}px; left:${a.left}px;
+            width:${a.width}px; height:${a.height}px;
+            border:3px solid ${borderColor}; box-sizing:border-box;
+            pointer-events:none; z-index:99999;
           `;
           overlay.appendChild(border);
 
-          // 半透明底色
-          const bgTint = document.createElement('div');
-          bgTint.style.cssText = `
-            position: absolute;
-            top: ${img.top}px;
-            left: ${img.left}px;
-            width: ${img.width}px;
-            height: ${img.height}px;
-            background: ${isImg ? 'rgba(0,150,255,0.06)' : 'rgba(255,100,0,0.06)'};
-            pointer-events: none;
-            z-index: 99998;
+          // 淡色底
+          const tint = document.createElement('div');
+          tint.style.cssText = `
+            position:absolute; top:${a.top}px; left:${a.left}px;
+            width:${a.width}px; height:${a.height}px;
+            background:rgba(0,150,255,${a.isDup ? '0.03' : '0.06'});
+            pointer-events:none; z-index:99998;
           `;
-          overlay.appendChild(bgTint);
+          overlay.appendChild(tint);
 
           // 編號圓圈
-          const numBadge = document.createElement('div');
-          numBadge.style.cssText = `
-            position: absolute;
-            top: ${img.top + 4}px;
-            left: ${img.left + 4}px;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: ${labelBg};
-            color: #fff;
-            font-size: 13px;
-            font-weight: bold;
-            font-family: Arial, sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 100001;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+          const badge = document.createElement('div');
+          badge.style.cssText = `
+            position:absolute; top:${a.top + 4}px; left:${a.left + 4}px;
+            width:28px; height:28px; border-radius:50%;
+            background:${labelBg}; color:#fff;
+            font:bold 13px Arial,sans-serif;
+            display:flex; align-items:center; justify-content:center;
+            z-index:100001; box-shadow:0 1px 4px rgba(0,0,0,0.4);
           `;
-          numBadge.textContent = idx + 1;
-          overlay.appendChild(numBadge);
+          badge.textContent = a.idx;
+          overlay.appendChild(badge);
 
-          // 尺寸標籤
-          const label = document.createElement('div');
-          const labelContent = `${img.width} × ${img.height}`;
-          const subInfo = img.src ? img.src : (img.containerClass || '');
+          // 尺寸標籤（僅主要項目顯示）
+          if (!a.isDup) {
+            const label = document.createElement('div');
+            label.style.cssText = `
+              position:absolute;
+              top:${a.top + a.height - 36}px;
+              left:${a.left + a.width / 2}px;
+              transform:translateX(-50%);
+              background:${labelBg}; color:#fff;
+              padding:3px 10px; border-radius:4px;
+              font:bold 13px 'Consolas','Monaco',monospace;
+              white-space:nowrap; z-index:100001;
+              box-shadow:0 2px 6px rgba(0,0,0,0.4);
+            `;
+            label.textContent = `${a.width} × ${a.height}`;
+            overlay.appendChild(label);
+          }
 
-          label.style.cssText = `
-            position: absolute;
-            top: ${img.top + img.height - 36}px;
-            left: ${img.left + img.width / 2}px;
-            transform: translateX(-50%);
-            background: ${labelBg};
-            color: #fff;
-            padding: 3px 10px;
-            border-radius: 4px;
-            font-family: 'Consolas', 'Monaco', monospace;
-            font-size: 13px;
-            font-weight: bold;
-            white-space: nowrap;
-            z-index: 100001;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-            text-align: center;
-            line-height: 1.5;
-          `;
-          label.innerHTML = `${labelContent}`;
-          overlay.appendChild(label);
-
-          // 如果尺寸太大，在頂部也放一個
-          if (img.height > 300) {
+          // 大圖頂部顯示檔名（僅主要項目 & 高度>200）
+          if (!a.isDup && a.height > 200 && a.src) {
             const topLabel = document.createElement('div');
             topLabel.style.cssText = `
-              position: absolute;
-              top: ${img.top + 6}px;
-              left: ${img.left + 36}px;
-              background: ${labelBg};
-              color: #fff;
-              padding: 2px 8px;
-              border-radius: 3px;
-              font-family: 'Consolas', 'Monaco', monospace;
-              font-size: 12px;
-              white-space: nowrap;
-              z-index: 100001;
-              box-shadow: 0 1px 4px rgba(0,0,0,0.3);
-              opacity: 0.9;
+              position:absolute; top:${a.top + 6}px; left:${a.left + 36}px;
+              background:${labelBg}; color:#fff;
+              padding:2px 8px; border-radius:3px;
+              font:12px 'Consolas',monospace;
+              white-space:nowrap; z-index:100001;
+              box-shadow:0 1px 4px rgba(0,0,0,0.3); opacity:0.9;
             `;
-            topLabel.textContent = subInfo.length > 35 ? subInfo.substring(0, 35) + '…' : subInfo;
+            const t = a.src;
+            topLabel.textContent = t.length > 35 ? t.substring(0, 35) + '…' : t;
             overlay.appendChild(topLabel);
           }
         });
 
-        // 圖例 (Legend)
+        // 圖例
         const legend = document.createElement('div');
         legend.style.cssText = `
-          position: fixed;
-          top: 10px;
-          right: 10px;
-          background: rgba(30,30,30,0.95);
-          color: #fff;
-          padding: 14px 18px;
-          border-radius: 8px;
-          font-family: 'Microsoft JhengHei', Arial, sans-serif;
-          font-size: 13px;
-          z-index: 100002;
-          box-shadow: 0 4px 16px rgba(0,0,0,0.5);
-          line-height: 1.8;
+          position:fixed; top:10px; right:10px;
+          background:rgba(30,30,30,0.95); color:#fff;
+          padding:14px 18px; border-radius:8px;
+          font:13px 'Microsoft JhengHei',Arial,sans-serif;
+          z-index:100002; box-shadow:0 4px 16px rgba(0,0,0,0.5);
+          line-height:1.8;
         `;
         legend.innerHTML = `
           <div style="font-size:15px;font-weight:bold;margin-bottom:6px;">圖片素材尺寸標註</div>
-          <div><span style="display:inline-block;width:14px;height:14px;background:${colors.imgBorder};border-radius:2px;vertical-align:middle;margin-right:6px;"></span> &lt;img&gt; 圖片</div>
-          <div><span style="display:inline-block;width:14px;height:14px;background:${colors.bgBorder};border-radius:2px;vertical-align:middle;margin-right:6px;"></span> 背景圖片 (CSS)</div>
-          <div style="margin-top:4px;font-size:12px;color:#bbb;">尺寸為 CSS 顯示尺寸 (px)<br>建議輸出 2x 解析度</div>
+          <div><span style="display:inline-block;width:14px;height:14px;background:${colors.border};border-radius:2px;vertical-align:middle;margin-right:6px;"></span> 需準備的圖片素材</div>
+          <div><span style="display:inline-block;width:14px;height:14px;background:${colors.dupBorder};border-radius:2px;vertical-align:middle;margin-right:6px;"></span> 同規格重複（僅需備一種尺寸）</div>
+          <div style="margin-top:4px;font-size:12px;color:#bbb;">尺寸為 CSS 顯示尺寸 (px)，建議輸出 2x 解析度</div>
         `;
         document.body.appendChild(legend);
 
-      }, { images: imageData, colors: COLORS });
+      }, { annotations: allAnnotations, colors: COLORS });
 
-      // 截圖
+      // ===== 6. 截圖 =====
       const screenshotName = pageInfo.file.replace('.html', '') + '.png';
-      const screenshotPath = path.join(OUTPUT_DIR, screenshotName);
-
       await page.screenshot({
-        path: screenshotPath,
+        path: path.join(OUTPUT_DIR, screenshotName),
         fullPage: true,
         type: 'png',
       });
 
-      console.log(`  ✅ 截圖已儲存: ${screenshotName} (${imageData.length} 個圖片)`);
+      console.log(`  ✅ 截圖: ${screenshotName}`);
 
       allPagesData.push({
         page: pageInfo.name,
         file: pageInfo.file,
         screenshot: screenshotName,
-        images: imageData,
+        uniqueImages,
+        totalCount,
       });
+
     } catch (err) {
       console.error(`  ❌ 處理失敗: ${err.message}`);
     } finally {
@@ -343,14 +350,13 @@ async function main() {
     }
   }
 
-  // 產生總覽 HTML 報告
   generateReport(allPagesData);
-
   await browser.close();
   console.log(`\n🎉 全部完成！結果已輸出至: image-specs/`);
   console.log(`   📊 開啟 image-specs/index.html 查看互動式報告`);
 }
 
+// ===== HTML 報告 =====
 function generateReport(allPagesData) {
   let html = `<!DOCTYPE html>
 <html lang="zh-TW">
@@ -359,40 +365,37 @@ function generateReport(allPagesData) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>圖片素材需求總覽 — 大毅建設官網</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Microsoft JhengHei', 'Noto Sans TC', sans-serif; background: #f5f5f5; color: #333; }
-  .header { background: linear-gradient(135deg, #194F5B, #2a7a8a); color: #fff; padding: 40px; text-align: center; }
-  .header h1 { font-size: 28px; margin-bottom: 8px; }
-  .header p { font-size: 14px; opacity: 0.8; }
-  .legend-bar { display: flex; justify-content: center; gap: 32px; padding: 16px 20px; background: #fff; border-bottom: 1px solid #e0e0e0; position: sticky; top: 0; z-index: 100; }
-  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 13px; }
-  .legend-dot { width: 14px; height: 14px; border-radius: 3px; }
-  .legend-dot.img { background: rgba(0
-, 150, 255, 0.8); }
-  .legend-dot.bg { background: rgba(255, 100, 0, 0.85); }
-  nav { background: #fff; padding: 16px 40px; display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid #e0e0e0; }
-  nav a { font-size: 13px; padding: 4px 12px; background: #eee; border-radius: 4px; text-decoration: none; color: #333; transition: all 0.2s; }
-  nav a:hover { background: #194F5B; color: #fff; }
-  .page-section { max-width: 1600px; margin: 32px auto; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-  .page-title { background: #194F5B; color: #fff; padding: 16px 24px; font-size: 18px; display: flex; justify-content: space-between; align-items: center; }
-  .page-title .badge { background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; font-size: 13px; }
-  .page-content { display: flex; gap: 0; }
-  .page-screenshot { flex: 1; min-width: 0; padding: 16px; overflow: auto; max-height: 800px; background: #fafafa; border-right: 1px solid #e0e0e0; }
-  .page-screenshot img { width: 100%; height: auto; display: block; border: 1px solid #ddd; cursor: zoom-in; }
-  .page-screenshot img.zoomed { width: auto; max-width: none; cursor: zoom-out; }
-  .page-table { width: 480px; flex-shrink: 0; overflow-y: auto; max-height: 800px; }
-  .page-table table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  .page-table th { background: #f0f0f0; padding: 10px 12px; text-align: left; font-weight: 600; position: sticky; top: 0; z-index: 1; }
-  .page-table td { padding: 8px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
-  .page-table tr:hover { background: #f8f9ff; }
-  .tag { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 11px; font-weight: 600; }
-  .tag-img { background: rgba(0,150,255,0.12); color: #0078dc; }
-  .tag-bg { background: rgba(255,100,0,0.12); color: #dc5000; }
-  .size { font-family: 'Consolas', monospace; font-weight: 600; color: #194F5B; }
-  .recommend { font-family: 'Consolas', monospace; color: #c00; font-weight: 600; }
-  .filename { font-size: 11px; color: #888; word-break: break-all; }
-  .container-class { font-size: 11px; color: #666; background: #f0f0f0; padding: 1px 4px; border-radius: 2px; }
-  footer { text-align: center; padding: 32px; font-size: 12px; color: #999; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Microsoft JhengHei','Noto Sans TC',sans-serif; background:#f5f5f5; color:#333; }
+  .header { background:linear-gradient(135deg,#194F5B,#2a7a8a); color:#fff; padding:40px; text-align:center; }
+  .header h1 { font-size:28px; margin-bottom:8px; }
+  .header p { font-size:14px; opacity:0.8; }
+  .legend-bar { display:flex; justify-content:center; gap:32px; padding:16px 20px; background:#fff; border-bottom:1px solid #e0e0e0; position:sticky; top:0; z-index:100; }
+  .legend-item { display:flex; align-items:center; gap:6px; font-size:13px; }
+  .legend-dot { width:14px; height:14px; border-radius:3px; }
+  .legend-dot.img { background:rgba(0,150,255,0.8); }
+  .legend-dot.dup { background:rgba(0,150,255,0.35); }
+  nav { background:#fff; padding:16px 40px; display:flex; flex-wrap:wrap; gap:8px; border-bottom:1px solid #e0e0e0; }
+  nav a { font-size:13px; padding:4px 12px; background:#eee; border-radius:4px; text-decoration:none; color:#333; transition:all 0.2s; }
+  nav a:hover { background:#194F5B; color:#fff; }
+  .page-section { max-width:1600px; margin:32px auto; background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,0.06); }
+  .page-title { background:#194F5B; color:#fff; padding:16px 24px; font-size:18px; display:flex; justify-content:space-between; align-items:center; }
+  .page-title .badge { background:rgba(255,255,255,0.2); padding:4px 12px; border-radius:20px; font-size:13px; }
+  .page-content { display:flex; gap:0; }
+  .page-screenshot { flex:1; min-width:0; padding:16px; overflow:auto; max-height:800px; background:#fafafa; border-right:1px solid #e0e0e0; }
+  .page-screenshot img { width:100%; height:auto; display:block; border:1px solid #ddd; cursor:zoom-in; }
+  .page-screenshot img.zoomed { width:auto; max-width:none; cursor:zoom-out; }
+  .page-table { width:520px; flex-shrink:0; overflow-y:auto; max-height:800px; }
+  .page-table table { width:100%; border-collapse:collapse; font-size:13px; }
+  .page-table th { background:#f0f0f0; padding:10px 12px; text-align:left; font-weight:600; position:sticky; top:0; z-index:1; }
+  .page-table td { padding:8px 12px; border-bottom:1px solid #f0f0f0; vertical-align:top; }
+  .page-table tr:hover { background:#f8f9ff; }
+  .size { font-family:'Consolas',monospace; font-weight:600; color:#194F5B; }
+  .recommend { font-family:'Consolas',monospace; color:#c00; font-weight:600; }
+  .filename { font-size:11px; color:#888; word-break:break-all; }
+  .container-class { font-size:11px; color:#666; background:#f0f0f0; padding:1px 4px; border-radius:2px; }
+  .count-badge { display:inline-block; background:#194F5B; color:#fff; padding:1px 7px; border-radius:10px; font-size:11px; font-weight:600; margin-left:4px; }
+  footer { text-align:center; padding:32px; font-size:12px; color:#999; }
 </style>
 </head>
 <body>
@@ -401,8 +404,8 @@ function generateReport(allPagesData) {
   <p>大毅建設官網 — 各頁面圖片尺寸標註 ｜ 產出時間：${new Date().toLocaleDateString('zh-TW')} ${new Date().toLocaleTimeString('zh-TW')}</p>
 </div>
 <div class="legend-bar">
-  <div class="legend-item"><div class="legend-dot img"></div> &lt;img&gt; 圖片元素</div>
-  <div class="legend-item"><div class="legend-dot bg"></div> CSS 背景圖片</div>
+  <div class="legend-item"><div class="legend-dot img"></div> 需準備的圖片素材</div>
+  <div class="legend-item"><div class="legend-dot dup"></div> 同規格重複（僅需準備一種尺寸）</div>
   <div class="legend-item" style="font-size:12px;color:#999;">尺寸格式：CSS 顯示尺寸 → <span style="color:#c00;font-weight:600;">建議 2x 輸出尺寸</span></div>
 </div>
 <nav>
@@ -411,14 +414,14 @@ function generateReport(allPagesData) {
 `;
 
   for (const pageData of allPagesData) {
-    const imgCount = pageData.images.filter(i => i.type === 'img').length;
-    const bgCount = pageData.images.filter(i => i.type === 'bg').length;
+    const specCount = pageData.uniqueImages.length;
+    const totalCount = pageData.totalCount;
 
     html += `
 <section class="page-section" id="${pageData.file}">
   <div class="page-title">
     <span>${pageData.page} <small style="opacity:0.7;font-size:13px;">(${pageData.file})</small></span>
-    <span class="badge">${imgCount} img ＋ ${bgCount} bg</span>
+    <span class="badge">${specCount} 種規格 ／ ${totalCount} 張圖</span>
   </div>
   <div class="page-content">
     <div class="page-screenshot">
@@ -427,24 +430,21 @@ function generateReport(allPagesData) {
     <div class="page-table">
       <table>
         <thead>
-          <tr><th>#</th><th>類型</th><th>CSS 尺寸</th><th>建議 2x</th><th>詳情</th></tr>
+          <tr><th>#</th><th>CSS 尺寸</th><th>建議 2x</th><th>詳情</th></tr>
         </thead>
         <tbody>
 `;
 
-    pageData.images.forEach((img, idx) => {
-      const typeTag = img.type === 'img'
-        ? '<span class="tag tag-img">IMG</span>'
-        : '<span class="tag tag-bg">BG</span>';
+    pageData.uniqueImages.forEach((group) => {
+      const img = group.image;
       const details = [];
       if (img.src) details.push(`<div class="filename">${img.src}</div>`);
       if (img.containerClass) details.push(`<span class="container-class">.${img.containerClass}</span>`);
       if (img.objectFit && img.objectFit !== 'fill') details.push(`<span class="container-class">${img.objectFit}</span>`);
-      if (img.bgSize) details.push(`<span class="container-class">bg-size: ${img.bgSize}</span>`);
+      if (group.count > 1) details.push(`<span class="count-badge">×${group.count}</span>`);
 
       html += `          <tr>
-            <td>${idx + 1}</td>
-            <td>${typeTag}</td>
+            <td>${group.idx}</td>
             <td class="size">${img.width} × ${img.height}</td>
             <td class="recommend">${img.recommend2x}</td>
             <td>${details.join(' ')}</td>
@@ -464,6 +464,7 @@ function generateReport(allPagesData) {
 <footer>
   <p>由 Playwright 自動產生 — 尺寸為頁面在 1920 × 1080 視窗下的 CSS 渲染尺寸</p>
   <p>實際輸出圖片建議使用 <strong>2 倍解析度</strong>，以確保 Retina 螢幕清晰度</p>
+  <p style="margin-top:8px;">已排除：裝飾性背景圖、SVG 圖示、箭頭圖示、底部延伸閱讀區塊</p>
 </footer>
 </body>
 </html>`;
