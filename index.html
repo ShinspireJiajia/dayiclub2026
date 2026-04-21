@@ -1,0 +1,1841 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>圖片素材需求總覽 — 大毅建設官網</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Microsoft JhengHei', 'Noto Sans TC', sans-serif; background: #f5f5f5; color: #333; }
+  .header { background: linear-gradient(135deg, #194F5B, #2a7a8a); color: #fff; padding: 40px; text-align: center; }
+  .header h1 { font-size: 28px; margin-bottom: 8px; }
+  .header p { font-size: 14px; opacity: 0.8; }
+  .legend-bar { display: flex; justify-content: center; gap: 32px; padding: 16px 20px; background: #fff; border-bottom: 1px solid #e0e0e0; position: sticky; top: 0; z-index: 100; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+  .legend-dot { width: 14px; height: 14px; border-radius: 3px; }
+  .legend-dot.img { background: rgba(0
+, 150, 255, 0.8); }
+  .legend-dot.bg { background: rgba(255, 100, 0, 0.85); }
+  nav { background: #fff; padding: 16px 40px; display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid #e0e0e0; }
+  nav a { font-size: 13px; padding: 4px 12px; background: #eee; border-radius: 4px; text-decoration: none; color: #333; transition: all 0.2s; }
+  nav a:hover { background: #194F5B; color: #fff; }
+  .page-section { max-width: 1600px; margin: 32px auto; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .page-title { background: #194F5B; color: #fff; padding: 16px 24px; font-size: 18px; display: flex; justify-content: space-between; align-items: center; }
+  .page-title .badge { background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; font-size: 13px; }
+  .page-content { display: flex; gap: 0; }
+  .page-screenshot { flex: 1; min-width: 0; padding: 16px; overflow: auto; max-height: 800px; background: #fafafa; border-right: 1px solid #e0e0e0; }
+  .page-screenshot img { width: 100%; height: auto; display: block; border: 1px solid #ddd; cursor: zoom-in; }
+  .page-screenshot img.zoomed { width: auto; max-width: none; cursor: zoom-out; }
+  .page-table { width: 480px; flex-shrink: 0; overflow-y: auto; max-height: 800px; }
+  .page-table table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .page-table th { background: #f0f0f0; padding: 10px 12px; text-align: left; font-weight: 600; position: sticky; top: 0; z-index: 1; }
+  .page-table td { padding: 8px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+  .page-table tr:hover { background: #f8f9ff; }
+  .tag { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 11px; font-weight: 600; }
+  .tag-img { background: rgba(0,150,255,0.12); color: #0078dc; }
+  .tag-bg { background: rgba(255,100,0,0.12); color: #dc5000; }
+  .size { font-family: 'Consolas', monospace; font-weight: 600; color: #194F5B; }
+  .recommend { font-family: 'Consolas', monospace; color: #c00; font-weight: 600; }
+  .filename { font-size: 11px; color: #888; word-break: break-all; }
+  .container-class { font-size: 11px; color: #666; background: #f0f0f0; padding: 1px 4px; border-radius: 2px; }
+  footer { text-align: center; padding: 32px; font-size: 12px; color: #999; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>📐 圖片素材需求總覽</h1>
+  <p>大毅建設官網 — 各頁面圖片尺寸標註 ｜ 產出時間：2026/4/21 下午2:02:39</p>
+</div>
+<div class="legend-bar">
+  <div class="legend-item"><div class="legend-dot img"></div> &lt;img&gt; 圖片元素</div>
+  <div class="legend-item"><div class="legend-dot bg"></div> CSS 背景圖片</div>
+  <div class="legend-item" style="font-size:12px;color:#999;">尺寸格式：CSS 顯示尺寸 → <span style="color:#c00;font-weight:600;">建議 2x 輸出尺寸</span></div>
+</div>
+<nav>
+  <a href="#home.html">首頁</a>
+  <a href="#room-list.html">客房列表</a>
+  <a href="#room-detail.html">客房詳情</a>
+  <a href="#dining.html">餐飲</a>
+  <a href="#leisure.html">休閒設施</a>
+  <a href="#themed-events.html">主題活動</a>
+  <a href="#classroom-tour.html">教室導覽</a>
+  <a href="#news.html">最新消息</a>
+  <a href="#news-article-1.html">新聞文章-1</a>
+  <a href="#news-article-2.html">新聞文章-2</a>
+  <a href="#news-article-3.html">新聞文章-3</a>
+  <a href="#academy-philosophy.html">學苑理念</a>
+  <a href="#gym-philosophy.html">健身理念</a>
+  <a href="#gym-team.html">健身團隊</a>
+  <a href="#health-center.html">健康中心</a>
+  <a href="#wellness-philosophy.html">養生哲學</a>
+  <a href="#lifestyle-butler.html">生活管家</a>
+  <a href="#environment.html">周邊環境</a>
+  <a href="#transport.html">交通資訊</a>
+  <a href="#booking.html">預約導覽</a>
+  <a href="#careers.html">人才招募</a>
+  <a href="#privacy.html">隱私政策</a>
+</nav>
+
+<section class="page-section" id="home.html">
+  <div class="page-title">
+    <span>首頁 <small style="opacity:0.7;font-size:13px;">(home.html)</small></span>
+    <span class="badge">19 img ＋ 0 bg</span>
+  </div>
+  <div class="page-content">
+    <div class="page-screenshot">
+      <img src="home.png" alt="首頁 截圖" onclick="this.classList.toggle('zoomed')">
+    </div>
+    <div class="page-table">
+      <table>
+        <thead>
+          <tr><th>#</th><th>類型</th><th>CSS 尺寸</th><th>建議 2x</th><th>詳情</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1920 × 1080</td>
+            <td class="recommend">3840 × 2160</td>
+            <td><div class="filename">banner-bg.jpg</div> <span class="container-class">.banner-slide</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1920 × 1080</td>
+            <td class="recommend">3840 × 2160</td>
+            <td><div class="filename">banner-bg.jpg</div> <span class="container-class">.banner-slide</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1920 × 1080</td>
+            <td class="recommend">3840 × 2160</td>
+            <td><div class="filename">banner-bg.jpg</div> <span class="container-class">.banner-slide</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1200 × 987</td>
+            <td class="recommend">2400 × 1974</td>
+            <td><div class="filename">deco-bg.png</div> <span class="container-class">.deco-bg-wave</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">987 × 507</td>
+            <td class="recommend">1974 × 1014</td>
+            <td><div class="filename">about-image.jpg</div> <span class="container-class">.about-intro-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">507 × 800</td>
+            <td class="recommend">1014 × 1600</td>
+            <td><div class="filename">about-person.jpg</div> <span class="container-class">.about-person-img</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1920 × 1080</td>
+            <td class="recommend">3840 × 2160</td>
+            <td><div class="filename">deco-image.jpg</div> <span class="container-class">.deco-side-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">827 × 427</td>
+            <td class="recommend">1654 × 854</td>
+            <td><div class="filename">service-1.jpg</div> <span class="container-class">.service-card</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">827 × 427</td>
+            <td class="recommend">1654 × 854</td>
+            <td><div class="filename">service-2.jpg</div> <span class="container-class">.service-card</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">827 × 427</td>
+            <td class="recommend">1654 × 854</td>
+            <td><div class="filename">service-3.jpg</div> <span class="container-class">.service-card</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">60 × 60</td>
+            <td class="recommend">120 × 120</td>
+            <td><div class="filename">arrow-right.png</div> <span class="container-class">.carousel-arrow</span></td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">60 × 60</td>
+            <td class="recommend">120 × 120</td>
+            <td><div class="filename">arrow-right.png</div> <span class="container-class">.carousel-arrow</span></td>
+          </tr>
+          <tr>
+            <td>13</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">784 × 533</td>
+            <td class="recommend">1568 × 1066</td>
+            <td><div class="filename">room-1.jpg</div> <span class="container-class">.room-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>14</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">784 × 533</td>
+            <td class="recommend">1568 × 1066</td>
+            <td><div class="filename">room-2.jpg</div> <span class="container-class">.room-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>15</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">496 × 279</td>
+            <td class="recommend">992 × 558</td>
+            <td><div class="filename">news-1.jpg</div> <span class="container-class">.news-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>16</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">496 × 279</td>
+            <td class="recommend">992 × 558</td>
+            <td><div class="filename">news-2.jpg</div> <span class="container-class">.news-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>17</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">496 × 279</td>
+            <td class="recommend">992 × 558</td>
+            <td><div class="filename">news-3.jpg</div> <span class="container-class">.news-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>18</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1923 × 1068</td>
+            <td class="recommend">3846 × 2136</td>
+            <td><div class="filename">map-building.png</div> <span class="container-class">.location-map-visual</span> <span class="container-class">contain</span></td>
+          </tr>
+          <tr>
+            <td>19</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1920 × 790</td>
+            <td class="recommend">3840 × 1580</td>
+            <td><div class="filename">content-bg-bottom.jpg</div> <span class="container-class">.content-bg-bottom</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="page-section" id="room-list.html">
+  <div class="page-title">
+    <span>客房列表 <small style="opacity:0.7;font-size:13px;">(room-list.html)</small></span>
+    <span class="badge">5 img ＋ 0 bg</span>
+  </div>
+  <div class="page-content">
+    <div class="page-screenshot">
+      <img src="room-list.png" alt="客房列表 截圖" onclick="this.classList.toggle('zoomed')">
+    </div>
+    <div class="page-table">
+      <table>
+        <thead>
+          <tr><th>#</th><th>類型</th><th>CSS 尺寸</th><th>建議 2x</th><th>詳情</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1840 × 400</td>
+            <td class="recommend">3680 × 800</td>
+            <td><div class="filename">room-list-hero-bg.jpg</div> <span class="container-class">.page-hero-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1333 × 507</td>
+            <td class="recommend">2666 × 1014</td>
+            <td><div class="filename">room-list-a.jpg</div> <span class="container-class">.room-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1333 × 507</td>
+            <td class="recommend">2666 × 1014</td>
+            <td><div class="filename">room-list-b.jpg</div> <span class="container-class">.room-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1333 × 507</td>
+            <td class="recommend">2666 × 1014</td>
+            <td><div class="filename">room-list-c.jpg</div> <span class="container-class">.room-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1333 × 507</td>
+            <td class="recommend">2666 × 1014</td>
+            <td><div class="filename">room-list-d.jpg</div> <span class="container-class">.room-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="page-section" id="room-detail.html">
+  <div class="page-title">
+    <span>客房詳情 <small style="opacity:0.7;font-size:13px;">(room-detail.html)</small></span>
+    <span class="badge">9 img ＋ 0 bg</span>
+  </div>
+  <div class="page-content">
+    <div class="page-screenshot">
+      <img src="room-detail.png" alt="客房詳情 截圖" onclick="this.classList.toggle('zoomed')">
+    </div>
+    <div class="page-table">
+      <table>
+        <thead>
+          <tr><th>#</th><th>類型</th><th>CSS 尺寸</th><th>建議 2x</th><th>詳情</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1840 × 400</td>
+            <td class="recommend">3680 × 800</td>
+            <td><div class="filename">room-detail-1.jpg</div> <span class="container-class">.page-hero-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1333 × 746</td>
+            <td class="recommend">2666 × 1492</td>
+            <td><div class="filename">room-detail-1.jpg</div> <span class="container-class">.room-gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1333 × 746</td>
+            <td class="recommend">2666 × 1492</td>
+            <td><div class="filename">room-detail-2.jpg</div> <span class="container-class">.room-gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1333 × 746</td>
+            <td class="recommend">2666 × 1492</td>
+            <td><div class="filename">room-detail-3.jpg</div> <span class="container-class">.room-gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1333 × 746</td>
+            <td class="recommend">2666 × 1492</td>
+            <td><div class="filename">room-detail-4.jpg</div> <span class="container-class">.room-gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1333 × 746</td>
+            <td class="recommend">2666 × 1492</td>
+            <td><div class="filename">room-detail-5.jpg</div> <span class="container-class">.room-gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">960 × 537</td>
+            <td class="recommend">1920 × 1074</td>
+            <td><div class="filename">room-detail-floorplan.jpg</div> <span class="container-class">.room-info-floorplan</span> <span class="container-class">contain</span></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">53 × 16</td>
+            <td class="recommend">106 × 32</td>
+            <td><div class="filename">room-spec-divider.svg</div> <span class="container-class">.room-spec-divider</span></td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">59 × 16</td>
+            <td class="recommend">118 × 32</td>
+            <td><div class="filename">room-spec-divider.svg</div> <span class="container-class">.room-spec-divider</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="page-section" id="dining.html">
+  <div class="page-title">
+    <span>餐飲 <small style="opacity:0.7;font-size:13px;">(dining.html)</small></span>
+    <span class="badge">7 img ＋ 0 bg</span>
+  </div>
+  <div class="page-content">
+    <div class="page-screenshot">
+      <img src="dining.png" alt="餐飲 截圖" onclick="this.classList.toggle('zoomed')">
+    </div>
+    <div class="page-table">
+      <table>
+        <thead>
+          <tr><th>#</th><th>類型</th><th>CSS 尺寸</th><th>建議 2x</th><th>詳情</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1840 × 400</td>
+            <td class="recommend">3680 × 800</td>
+            <td><div class="filename">dining-hero-bg.jpg</div> <span class="container-class">.page-hero-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1536 × 663</td>
+            <td class="recommend">3072 × 1326</td>
+            <td><div class="filename">picture-bg.jpg</div> <span class="container-class">.dining-content-bg</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1600 × 750</td>
+            <td class="recommend">3200 × 1500</td>
+            <td><div class="filename">dining-main-photo.jpg</div> <span class="container-class">.dining-main-photo</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">2007 × 837</td>
+            <td class="recommend">4014 × 1674</td>
+            <td><div class="filename">content-bg-bottom.jpg</div> <span class="container-class">.dining-bg-decoration</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 295</td>
+            <td class="recommend">970 × 590</td>
+            <td><div class="filename">dining-gallery-1.jpg</div> <span class="container-class">.gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 295</td>
+            <td class="recommend">970 × 590</td>
+            <td><div class="filename">dining-gallery-2.jpg</div> <span class="container-class">.gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 295</td>
+            <td class="recommend">970 × 590</td>
+            <td><div class="filename">dining-gallery-3.jpg</div> <span class="container-class">.gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="page-section" id="leisure.html">
+  <div class="page-title">
+    <span>休閒設施 <small style="opacity:0.7;font-size:13px;">(leisure.html)</small></span>
+    <span class="badge">12 img ＋ 0 bg</span>
+  </div>
+  <div class="page-content">
+    <div class="page-screenshot">
+      <img src="leisure.png" alt="休閒設施 截圖" onclick="this.classList.toggle('zoomed')">
+    </div>
+    <div class="page-table">
+      <table>
+        <thead>
+          <tr><th>#</th><th>類型</th><th>CSS 尺寸</th><th>建議 2x</th><th>詳情</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1840 × 400</td>
+            <td class="recommend">3680 × 800</td>
+            <td><div class="filename">leisure-hero-bg.jpg</div> <span class="container-class">.page-hero-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">960 × 480</td>
+            <td class="recommend">1920 × 960</td>
+            <td><div class="filename">picture-bg.jpg</div> <span class="container-class">.facility-bg-pattern</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">960 × 451</td>
+            <td class="recommend">1920 × 902</td>
+            <td><div class="filename">leisure-bar.jpg</div> <span class="container-class">.facility-photo</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">960 × 480</td>
+            <td class="recommend">1920 × 960</td>
+            <td><div class="filename">picture-bg.jpg</div> <span class="container-class">.facility-bg-pattern</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">960 × 451</td>
+            <td class="recommend">1920 × 902</td>
+            <td><div class="filename">leisure-karaoke.jpg</div> <span class="container-class">.facility-photo</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">960 × 480</td>
+            <td class="recommend">1920 × 960</td>
+            <td><div class="filename">picture-bg.jpg</div> <span class="container-class">.facility-bg-pattern</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">960 × 451</td>
+            <td class="recommend">1920 × 902</td>
+            <td><div class="filename">leisure-game.jpg</div> <span class="container-class">.facility-photo</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">960 × 480</td>
+            <td class="recommend">1920 × 960</td>
+            <td><div class="filename">picture-bg.jpg</div> <span class="container-class">.facility-bg-pattern</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">960 × 451</td>
+            <td class="recommend">1920 × 902</td>
+            <td><div class="filename">leisure-spa.jpg</div> <span class="container-class">.facility-photo</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">960 × 480</td>
+            <td class="recommend">1920 × 960</td>
+            <td><div class="filename">picture-bg.jpg</div> <span class="container-class">.facility-bg-pattern</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">960 × 451</td>
+            <td class="recommend">1920 × 902</td>
+            <td><div class="filename">leisure-playground.jpg</div> <span class="container-class">.facility-photo</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1920 × 837</td>
+            <td class="recommend">3840 × 1674</td>
+            <td><div class="filename">content-bg-bottom.jpg</div> <span class="container-class">.leisure-bg-decoration</span> <span class="container-class">cover</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="page-section" id="themed-events.html">
+  <div class="page-title">
+    <span>主題活動 <small style="opacity:0.7;font-size:13px;">(themed-events.html)</small></span>
+    <span class="badge">15 img ＋ 0 bg</span>
+  </div>
+  <div class="page-content">
+    <div class="page-screenshot">
+      <img src="themed-events.png" alt="主題活動 截圖" onclick="this.classList.toggle('zoomed')">
+    </div>
+    <div class="page-table">
+      <table>
+        <thead>
+          <tr><th>#</th><th>類型</th><th>CSS 尺寸</th><th>建議 2x</th><th>詳情</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1840 × 400</td>
+            <td class="recommend">3680 × 800</td>
+            <td><div class="filename">events-hero-bg.jpg</div> <span class="container-class">.events-hero-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">960 × 477</td>
+            <td class="recommend">1920 × 954</td>
+            <td><div class="filename">events-featured-1.jpg</div> <span class="container-class">.events-featured-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">960 × 477</td>
+            <td class="recommend">1920 × 954</td>
+            <td><div class="filename">events-featured-2.jpg</div> <span class="container-class">.events-featured-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 273</td>
+            <td class="recommend">970 × 546</td>
+            <td><div class="filename">events-card-1.jpg</div> <span class="container-class">.events-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 273</td>
+            <td class="recommend">970 × 546</td>
+            <td><div class="filename">events-card-1.jpg</div> <span class="container-class">.events-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 273</td>
+            <td class="recommend">970 × 546</td>
+            <td><div class="filename">events-card-1.jpg</div> <span class="container-class">.events-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 273</td>
+            <td class="recommend">970 × 546</td>
+            <td><div class="filename">events-card-1.jpg</div> <span class="container-class">.events-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 273</td>
+            <td class="recommend">970 × 546</td>
+            <td><div class="filename">events-card-1.jpg</div> <span class="container-class">.events-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 273</td>
+            <td class="recommend">970 × 546</td>
+            <td><div class="filename">events-card-1.jpg</div> <span class="container-class">.events-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 273</td>
+            <td class="recommend">970 × 546</td>
+            <td><div class="filename">events-card-1.jpg</div> <span class="container-class">.events-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 273</td>
+            <td class="recommend">970 × 546</td>
+            <td><div class="filename">events-card-1.jpg</div> <span class="container-class">.events-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 273</td>
+            <td class="recommend">970 × 546</td>
+            <td><div class="filename">events-card-1.jpg</div> <span class="container-class">.events-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>13</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 273</td>
+            <td class="recommend">970 × 546</td>
+            <td><div class="filename">events-card-1.jpg</div> <span class="container-class">.events-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>14</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 273</td>
+            <td class="recommend">970 × 546</td>
+            <td><div class="filename">events-card-1.jpg</div> <span class="container-class">.events-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>15</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 273</td>
+            <td class="recommend">970 × 546</td>
+            <td><div class="filename">events-card-1.jpg</div> <span class="container-class">.events-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="page-section" id="classroom-tour.html">
+  <div class="page-title">
+    <span>教室導覽 <small style="opacity:0.7;font-size:13px;">(classroom-tour.html)</small></span>
+    <span class="badge">17 img ＋ 0 bg</span>
+  </div>
+  <div class="page-content">
+    <div class="page-screenshot">
+      <img src="classroom-tour.png" alt="教室導覽 截圖" onclick="this.classList.toggle('zoomed')">
+    </div>
+    <div class="page-table">
+      <table>
+        <thead>
+          <tr><th>#</th><th>類型</th><th>CSS 尺寸</th><th>建議 2x</th><th>詳情</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1840 × 400</td>
+            <td class="recommend">3680 × 800</td>
+            <td><div class="filename">classroom-hero-bg.jpg</div> <span class="container-class">.page-hero-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">444 × 507</td>
+            <td class="recommend">888 × 1014</td>
+            <td><div class="filename">classroom-a-1.jpg</div> <span class="container-class">.classroom-gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">444 × 507</td>
+            <td class="recommend">888 × 1014</td>
+            <td><div class="filename">classroom-a-2.jpg</div> <span class="container-class">.classroom-gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">444 × 507</td>
+            <td class="recommend">888 × 1014</td>
+            <td><div class="filename">classroom-a-3.jpg</div> <span class="container-class">.classroom-gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">444 × 507</td>
+            <td class="recommend">888 × 1014</td>
+            <td><div class="filename">classroom-b-1.jpg</div> <span class="container-class">.classroom-gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">444 × 507</td>
+            <td class="recommend">888 × 1014</td>
+            <td><div class="filename">classroom-b-2.jpg</div> <span class="container-class">.classroom-gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">444 × 507</td>
+            <td class="recommend">888 × 1014</td>
+            <td><div class="filename">classroom-b-3.jpg</div> <span class="container-class">.classroom-gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">444 × 507</td>
+            <td class="recommend">888 × 1014</td>
+            <td><div class="filename">classroom-c-1.jpg</div> <span class="container-class">.classroom-gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">444 × 507</td>
+            <td class="recommend">888 × 1014</td>
+            <td><div class="filename">classroom-c-2.jpg</div> <span class="container-class">.classroom-gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">444 × 507</td>
+            <td class="recommend">888 × 1014</td>
+            <td><div class="filename">classroom-c-3.jpg</div> <span class="container-class">.classroom-gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">444 × 507</td>
+            <td class="recommend">888 × 1014</td>
+            <td><div class="filename">classroom-d-1.jpg</div> <span class="container-class">.classroom-gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">444 × 507</td>
+            <td class="recommend">888 × 1014</td>
+            <td><div class="filename">classroom-d-2.jpg</div> <span class="container-class">.classroom-gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>13</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">444 × 507</td>
+            <td class="recommend">888 × 1014</td>
+            <td><div class="filename">classroom-c-1.jpg</div> <span class="container-class">.classroom-gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>14</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">444 × 507</td>
+            <td class="recommend">888 × 1014</td>
+            <td><div class="filename">classroom-study-1.jpg</div> <span class="container-class">.classroom-gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>15</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">444 × 507</td>
+            <td class="recommend">888 × 1014</td>
+            <td><div class="filename">classroom-study-2.jpg</div> <span class="container-class">.classroom-gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>16</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">444 × 507</td>
+            <td class="recommend">888 × 1014</td>
+            <td><div class="filename">classroom-study-3.jpg</div> <span class="container-class">.classroom-gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>17</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1920 × 790</td>
+            <td class="recommend">3840 × 1580</td>
+            <td><div class="filename">content-bg-bottom.jpg</div> <span class="container-class">.content-bg-bottom</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="page-section" id="news.html">
+  <div class="page-title">
+    <span>最新消息 <small style="opacity:0.7;font-size:13px;">(news.html)</small></span>
+    <span class="badge">12 img ＋ 0 bg</span>
+  </div>
+  <div class="page-content">
+    <div class="page-screenshot">
+      <img src="news.png" alt="最新消息 截圖" onclick="this.classList.toggle('zoomed')">
+    </div>
+    <div class="page-table">
+      <table>
+        <thead>
+          <tr><th>#</th><th>類型</th><th>CSS 尺寸</th><th>建議 2x</th><th>詳情</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1840 × 400</td>
+            <td class="recommend">3680 × 800</td>
+            <td><div class="filename">news-banner.jpg</div> <span class="container-class">.page-hero-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">713 × 353</td>
+            <td class="recommend">1426 × 706</td>
+            <td><div class="filename">news-hero-image.jpg</div> <span class="container-class">.news-featured-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">484 × 272</td>
+            <td class="recommend">968 × 544</td>
+            <td><div class="filename">news-card-1.jpg</div> <span class="container-class">.news-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">484 × 272</td>
+            <td class="recommend">968 × 544</td>
+            <td><div class="filename">news-card-2.jpg</div> <span class="container-class">.news-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">484 × 272</td>
+            <td class="recommend">968 × 544</td>
+            <td><div class="filename">news-card-3.jpg</div> <span class="container-class">.news-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">484 × 272</td>
+            <td class="recommend">968 × 544</td>
+            <td><div class="filename">news-card-4.jpg</div> <span class="container-class">.news-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">484 × 272</td>
+            <td class="recommend">968 × 544</td>
+            <td><div class="filename">news-card-1.jpg</div> <span class="container-class">.news-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">484 × 272</td>
+            <td class="recommend">968 × 544</td>
+            <td><div class="filename">news-card-2.jpg</div> <span class="container-class">.news-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">484 × 272</td>
+            <td class="recommend">968 × 544</td>
+            <td><div class="filename">news-card-3.jpg</div> <span class="container-class">.news-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">484 × 272</td>
+            <td class="recommend">968 × 544</td>
+            <td><div class="filename">news-card-4.jpg</div> <span class="container-class">.news-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">484 × 272</td>
+            <td class="recommend">968 × 544</td>
+            <td><div class="filename">news-card-1.jpg</div> <span class="container-class">.news-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">484 × 272</td>
+            <td class="recommend">968 × 544</td>
+            <td><div class="filename">news-card-2.jpg</div> <span class="container-class">.news-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="page-section" id="news-article-1.html">
+  <div class="page-title">
+    <span>新聞文章-1 <small style="opacity:0.7;font-size:13px;">(news-article-1.html)</small></span>
+    <span class="badge">6 img ＋ 0 bg</span>
+  </div>
+  <div class="page-content">
+    <div class="page-screenshot">
+      <img src="news-article-1.png" alt="新聞文章-1 截圖" onclick="this.classList.toggle('zoomed')">
+    </div>
+    <div class="page-table">
+      <table>
+        <thead>
+          <tr><th>#</th><th>類型</th><th>CSS 尺寸</th><th>建議 2x</th><th>詳情</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1440 × 747</td>
+            <td class="recommend">2880 × 1494</td>
+            <td><div class="filename">news-hero-image.jpg</div> <span class="container-class">.article-hero</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">60 × 60</td>
+            <td class="recommend">120 × 120</td>
+            <td><div class="filename">arrow-left.png</div> <span class="container-class">.article-nav-prev</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">60 × 60</td>
+            <td class="recommend">120 × 120</td>
+            <td><div class="filename">arrow-right.png</div> <span class="container-class">.article-nav-next</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">427 × 240</td>
+            <td class="recommend">854 × 480</td>
+            <td><div class="filename">news-card-1.jpg</div> <span class="container-class">.article-news-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">427 × 240</td>
+            <td class="recommend">854 × 480</td>
+            <td><div class="filename">news-card-2.jpg</div> <span class="container-class">.article-news-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">427 × 240</td>
+            <td class="recommend">854 × 480</td>
+            <td><div class="filename">news-card-3.jpg</div> <span class="container-class">.article-news-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="page-section" id="news-article-2.html">
+  <div class="page-title">
+    <span>新聞文章-2 <small style="opacity:0.7;font-size:13px;">(news-article-2.html)</small></span>
+    <span class="badge">12 img ＋ 0 bg</span>
+  </div>
+  <div class="page-content">
+    <div class="page-screenshot">
+      <img src="news-article-2.png" alt="新聞文章-2 截圖" onclick="this.classList.toggle('zoomed')">
+    </div>
+    <div class="page-table">
+      <table>
+        <thead>
+          <tr><th>#</th><th>類型</th><th>CSS 尺寸</th><th>建議 2x</th><th>詳情</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1440 × 747</td>
+            <td class="recommend">2880 × 1494</td>
+            <td><div class="filename">news-hero-image.jpg</div> <span class="container-class">.article-hero</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 307</td>
+            <td class="recommend">970 × 614</td>
+            <td><div class="filename">news-card-1.jpg</div> <span class="container-class">.article-gallery-item-inner</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 307</td>
+            <td class="recommend">970 × 614</td>
+            <td><div class="filename">news-card-2.jpg</div> <span class="container-class">.article-gallery-item-inner</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 307</td>
+            <td class="recommend">970 × 614</td>
+            <td><div class="filename">news-card-3.jpg</div> <span class="container-class">.article-gallery-item-inner</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 307</td>
+            <td class="recommend">970 × 614</td>
+            <td><div class="filename">news-card-4.jpg</div> <span class="container-class">.article-gallery-item-inner</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 307</td>
+            <td class="recommend">970 × 614</td>
+            <td><div class="filename">news-card-5.jpg</div> <span class="container-class">.article-gallery-item-inner</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 307</td>
+            <td class="recommend">970 × 614</td>
+            <td><div class="filename">news-card-6.jpg</div> <span class="container-class">.article-gallery-item-inner</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">60 × 60</td>
+            <td class="recommend">120 × 120</td>
+            <td><div class="filename">arrow-left.png</div> <span class="container-class">.article-nav-prev</span></td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">60 × 60</td>
+            <td class="recommend">120 × 120</td>
+            <td><div class="filename">arrow-right.png</div> <span class="container-class">.article-nav-next</span></td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">427 × 240</td>
+            <td class="recommend">854 × 480</td>
+            <td><div class="filename">news-card-1.jpg</div> <span class="container-class">.article-news-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">427 × 240</td>
+            <td class="recommend">854 × 480</td>
+            <td><div class="filename">news-card-2.jpg</div> <span class="container-class">.article-news-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">427 × 240</td>
+            <td class="recommend">854 × 480</td>
+            <td><div class="filename">news-card-3.jpg</div> <span class="container-class">.article-news-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="page-section" id="news-article-3.html">
+  <div class="page-title">
+    <span>新聞文章-3 <small style="opacity:0.7;font-size:13px;">(news-article-3.html)</small></span>
+    <span class="badge">5 img ＋ 0 bg</span>
+  </div>
+  <div class="page-content">
+    <div class="page-screenshot">
+      <img src="news-article-3.png" alt="新聞文章-3 截圖" onclick="this.classList.toggle('zoomed')">
+    </div>
+    <div class="page-table">
+      <table>
+        <thead>
+          <tr><th>#</th><th>類型</th><th>CSS 尺寸</th><th>建議 2x</th><th>詳情</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">60 × 60</td>
+            <td class="recommend">120 × 120</td>
+            <td><div class="filename">arrow-left.png</div> <span class="container-class">.article-nav-prev</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">60 × 60</td>
+            <td class="recommend">120 × 120</td>
+            <td><div class="filename">arrow-right.png</div> <span class="container-class">.article-nav-next</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">427 × 240</td>
+            <td class="recommend">854 × 480</td>
+            <td><div class="filename">news-card-1.jpg</div> <span class="container-class">.article-news-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">427 × 240</td>
+            <td class="recommend">854 × 480</td>
+            <td><div class="filename">news-card-2.jpg</div> <span class="container-class">.article-news-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">427 × 240</td>
+            <td class="recommend">854 × 480</td>
+            <td><div class="filename">news-card-3.jpg</div> <span class="container-class">.article-news-card-image</span> <span class="container-class">cover</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="page-section" id="academy-philosophy.html">
+  <div class="page-title">
+    <span>學苑理念 <small style="opacity:0.7;font-size:13px;">(academy-philosophy.html)</small></span>
+    <span class="badge">4 img ＋ 0 bg</span>
+  </div>
+  <div class="page-content">
+    <div class="page-screenshot">
+      <img src="academy-philosophy.png" alt="學苑理念 截圖" onclick="this.classList.toggle('zoomed')">
+    </div>
+    <div class="page-table">
+      <table>
+        <thead>
+          <tr><th>#</th><th>類型</th><th>CSS 尺寸</th><th>建議 2x</th><th>詳情</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1840 × 400</td>
+            <td class="recommend">3680 × 800</td>
+            <td><div class="filename">academy-hero-bg.jpg</div> <span class="container-class">.page-hero-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">877 × 475</td>
+            <td class="recommend">1754 × 950</td>
+            <td><div class="filename">academy-photo-1.jpg</div> <span class="container-class">.academy-statement-photo</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">2007 × 837</td>
+            <td class="recommend">4014 × 1674</td>
+            <td><div class="filename">content-bg-bottom.jpg</div> <span class="container-class">.academy-services-bg</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">533 × 747</td>
+            <td class="recommend">1066 × 1494</td>
+            <td><div class="filename">academy-photo-2.jpg</div> <span class="container-class">.academy-services-photo</span> <span class="container-class">cover</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="page-section" id="gym-philosophy.html">
+  <div class="page-title">
+    <span>健身理念 <small style="opacity:0.7;font-size:13px;">(gym-philosophy.html)</small></span>
+    <span class="badge">7 img ＋ 0 bg</span>
+  </div>
+  <div class="page-content">
+    <div class="page-screenshot">
+      <img src="gym-philosophy.png" alt="健身理念 截圖" onclick="this.classList.toggle('zoomed')">
+    </div>
+    <div class="page-table">
+      <table>
+        <thead>
+          <tr><th>#</th><th>類型</th><th>CSS 尺寸</th><th>建議 2x</th><th>詳情</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1840 × 300</td>
+            <td class="recommend">3680 × 600</td>
+            <td><div class="filename">gym-philosophy-hero-bg.jpg</div> <span class="container-class">.page-hero-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">640 × 280</td>
+            <td class="recommend">1280 × 560</td>
+            <td><div class="filename">gym-philosophy-photo-2.jpg</div> <span class="container-class">.gym-photo-front-inner</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">640 × 300</td>
+            <td class="recommend">1280 × 600</td>
+            <td><div class="filename">gym-philosophy-photo-1.jpg</div> <span class="container-class">.gym-photo-back</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">352 × 211</td>
+            <td class="recommend">704 × 422</td>
+            <td><div class="filename">gym-philosophy-gallery-1.jpg</div> <span class="container-class">.gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">352 × 211</td>
+            <td class="recommend">704 × 422</td>
+            <td><div class="filename">gym-philosophy-hero-bg.jpg</div> <span class="container-class">.gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">352 × 211</td>
+            <td class="recommend">704 × 422</td>
+            <td><div class="filename">gym-philosophy-gallery-3.jpg</div> <span class="container-class">.gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1527 × 628</td>
+            <td class="recommend">3054 × 1256</td>
+            <td><div class="filename">gym-philosophy-bg-bottom.jpg</div> <span class="container-class">.gym-philosophy-bg-decoration</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="page-section" id="gym-team.html">
+  <div class="page-title">
+    <span>健身團隊 <small style="opacity:0.7;font-size:13px;">(gym-team.html)</small></span>
+    <span class="badge">12 img ＋ 0 bg</span>
+  </div>
+  <div class="page-content">
+    <div class="page-screenshot">
+      <img src="gym-team.png" alt="健身團隊 截圖" onclick="this.classList.toggle('zoomed')">
+    </div>
+    <div class="page-table">
+      <table>
+        <thead>
+          <tr><th>#</th><th>類型</th><th>CSS 尺寸</th><th>建議 2x</th><th>詳情</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1840 × 400</td>
+            <td class="recommend">3680 × 800</td>
+            <td><div class="filename">gym-equipment-1.jpg</div> <span class="container-class">.page-hero-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">877 × 475</td>
+            <td class="recommend">1754 × 950</td>
+            <td><div class="filename">gym-equipment-1.jpg</div> <span class="container-class">.equipment-photo</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 295</td>
+            <td class="recommend">970 × 590</td>
+            <td><div class="filename">gym-gallery-1.jpg</div> <span class="container-class">.gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 295</td>
+            <td class="recommend">970 × 590</td>
+            <td><div class="filename">gym-equipment-1.jpg</div> <span class="container-class">.gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 295</td>
+            <td class="recommend">970 × 590</td>
+            <td><div class="filename">gym-gallery-2.jpg</div> <span class="container-class">.gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">877 × 475</td>
+            <td class="recommend">1754 × 950</td>
+            <td><div class="filename">gym-equipment-1.jpg</div> <span class="container-class">.equipment-photo</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 295</td>
+            <td class="recommend">970 × 590</td>
+            <td><div class="filename">gym-gallery-1.jpg</div> <span class="container-class">.gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 295</td>
+            <td class="recommend">970 × 590</td>
+            <td><div class="filename">gym-equipment-1.jpg</div> <span class="container-class">.gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 295</td>
+            <td class="recommend">970 × 590</td>
+            <td><div class="filename">gym-gallery-2.jpg</div> <span class="container-class">.gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">893 × 475</td>
+            <td class="recommend">1786 × 950</td>
+            <td><div class="filename">gym-doctor.jpg</div> <span class="container-class">.team-doctor-photo</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">779 × 413</td>
+            <td class="recommend">1558 × 826</td>
+            <td><div class="filename">gym-coach-1.jpg</div> <span class="container-class">.coach-photo</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">779 × 413</td>
+            <td class="recommend">1558 × 826</td>
+            <td><div class="filename">gym-coach-2.jpg</div> <span class="container-class">.coach-photo</span> <span class="container-class">cover</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="page-section" id="health-center.html">
+  <div class="page-title">
+    <span>健康中心 <small style="opacity:0.7;font-size:13px;">(health-center.html)</small></span>
+    <span class="badge">8 img ＋ 0 bg</span>
+  </div>
+  <div class="page-content">
+    <div class="page-screenshot">
+      <img src="health-center.png" alt="健康中心 截圖" onclick="this.classList.toggle('zoomed')">
+    </div>
+    <div class="page-table">
+      <table>
+        <thead>
+          <tr><th>#</th><th>類型</th><th>CSS 尺寸</th><th>建議 2x</th><th>詳情</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1840 × 400</td>
+            <td class="recommend">3680 × 800</td>
+            <td><div class="filename">health-hero-bg.jpg</div> <span class="container-class">.page-hero-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">853 × 455</td>
+            <td class="recommend">1706 × 910</td>
+            <td><div class="filename">health-carousel-1.jpg</div> <span class="container-class">.health-carousel-slide</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">853 × 455</td>
+            <td class="recommend">1706 × 910</td>
+            <td><div class="filename">health-carousel-2.jpg</div> <span class="container-class">.health-carousel-slide</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">853 × 455</td>
+            <td class="recommend">1706 × 910</td>
+            <td><div class="filename">health-carousel-3.jpg</div> <span class="container-class">.health-carousel-slide</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">60 × 60</td>
+            <td class="recommend">120 × 120</td>
+            <td><div class="filename">arrow-left.png</div> <span class="container-class">.health-carousel-btn</span></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">60 × 60</td>
+            <td class="recommend">120 × 120</td>
+            <td><div class="filename">arrow-right.png</div> <span class="container-class">.health-carousel-btn</span></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">853 × 400</td>
+            <td class="recommend">1706 × 800</td>
+            <td><div class="filename">health-service-main.jpg</div> <span class="container-class">.health-service-img-main</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">853 × 373</td>
+            <td class="recommend">1706 × 746</td>
+            <td><div class="filename">picture-bg.jpg</div> <span class="container-class">.health-service-img-bg</span> <span class="container-class">cover</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="page-section" id="wellness-philosophy.html">
+  <div class="page-title">
+    <span>養生哲學 <small style="opacity:0.7;font-size:13px;">(wellness-philosophy.html)</small></span>
+    <span class="badge">5 img ＋ 1 bg</span>
+  </div>
+  <div class="page-content">
+    <div class="page-screenshot">
+      <img src="wellness-philosophy.png" alt="養生哲學 截圖" onclick="this.classList.toggle('zoomed')">
+    </div>
+    <div class="page-table">
+      <table>
+        <thead>
+          <tr><th>#</th><th>類型</th><th>CSS 尺寸</th><th>建議 2x</th><th>詳情</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1840 × 400</td>
+            <td class="recommend">3680 × 800</td>
+            <td><div class="filename">wellness-hero-bg.jpg</div> <span class="container-class">.page-hero-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">507 × 533</td>
+            <td class="recommend">1014 × 1066</td>
+            <td><div class="filename">wellness-photo-1.jpg</div> <span class="container-class">.wellness-photo-left</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1067 × 587</td>
+            <td class="recommend">2134 × 1174</td>
+            <td><div class="filename">wellness-photo-2.jpg</div> <span class="container-class">.wellness-photo-right</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">960 × 533</td>
+            <td class="recommend">1920 × 1066</td>
+            <td><div class="filename">wellness-photo-3.jpg</div> <span class="container-class">.wellness-spirit-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1920 × 507</td>
+            <td class="recommend">3840 × 1014</td>
+            <td><div class="filename">wellness-building-night.jpg</div> <span class="container-class">.wellness-night-view</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><span class="tag tag-bg">BG</span></td>
+            <td class="size">1042 × 116</td>
+            <td class="recommend">2084 × 232</td>
+            <td><div class="filename">wellness-text-bg.png</div> <span class="container-class">.decorative-text</span> <span class="container-class">bg-size: cover</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="page-section" id="lifestyle-butler.html">
+  <div class="page-title">
+    <span>生活管家 <small style="opacity:0.7;font-size:13px;">(lifestyle-butler.html)</small></span>
+    <span class="badge">5 img ＋ 1 bg</span>
+  </div>
+  <div class="page-content">
+    <div class="page-screenshot">
+      <img src="lifestyle-butler.png" alt="生活管家 截圖" onclick="this.classList.toggle('zoomed')">
+    </div>
+    <div class="page-table">
+      <table>
+        <thead>
+          <tr><th>#</th><th>類型</th><th>CSS 尺寸</th><th>建議 2x</th><th>詳情</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1840 × 400</td>
+            <td class="recommend">3680 × 800</td>
+            <td><div class="filename">butler-hero-bg.jpg</div> <span class="container-class">.page-hero-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">507 × 533</td>
+            <td class="recommend">1014 × 1066</td>
+            <td><div class="filename">butler-photo-left.jpg</div> <span class="container-class">.butler-photo-left</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">747 × 587</td>
+            <td class="recommend">1494 × 1174</td>
+            <td><div class="filename">butler-photo-right.jpg</div> <span class="container-class">.butler-photo-right</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">960 × 533</td>
+            <td class="recommend">1920 × 1066</td>
+            <td><div class="filename">butler-service-photo.jpg</div> <span class="container-class">.butler-service-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1920 × 507</td>
+            <td class="recommend">3840 × 1014</td>
+            <td><div class="filename">butler-building-night.jpg</div> <span class="container-class">.butler-night-view</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><span class="tag tag-bg">BG</span></td>
+            <td class="size">506 × 116</td>
+            <td class="recommend">1012 × 232</td>
+            <td><div class="filename">butler-living-text-bg.jpg</div> <span class="container-class">.butler-decorative-text</span> <span class="container-class">bg-size: cover</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="page-section" id="environment.html">
+  <div class="page-title">
+    <span>周邊環境 <small style="opacity:0.7;font-size:13px;">(environment.html)</small></span>
+    <span class="badge">9 img ＋ 0 bg</span>
+  </div>
+  <div class="page-content">
+    <div class="page-screenshot">
+      <img src="environment.png" alt="周邊環境 截圖" onclick="this.classList.toggle('zoomed')">
+    </div>
+    <div class="page-table">
+      <table>
+        <thead>
+          <tr><th>#</th><th>類型</th><th>CSS 尺寸</th><th>建議 2x</th><th>詳情</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1840 × 400</td>
+            <td class="recommend">3680 × 800</td>
+            <td><div class="filename">environment-hero-bg.jpg</div> <span class="container-class">.page-hero-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1920 × 1067</td>
+            <td class="recommend">3840 × 2134</td>
+            <td><div class="filename">environment-map-fill.svg</div> <span class="container-class">.env-map-bg</span> <span class="container-class">contain</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">24 × 24</td>
+            <td class="recommend">48 × 48</td>
+            <td><div class="filename">environment-map-exclude.svg</div> <span class="container-class">.env-map-building-marker</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">2008 × 837</td>
+            <td class="recommend">4016 × 1674</td>
+            <td><div class="filename">environment-content-bg.jpg</div> <span class="container-class">.env-map-bg-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">639 × 341</td>
+            <td class="recommend">1278 × 682</td>
+            <td><div class="filename">environment-local-1.jpg</div> <span class="container-class">.env-local-card-img</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">639 × 341</td>
+            <td class="recommend">1278 × 682</td>
+            <td><div class="filename">environment-local-2.jpg</div> <span class="container-class">.env-local-card-img</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">639 × 341</td>
+            <td class="recommend">1278 × 682</td>
+            <td><div class="filename">environment-local-3.jpg</div> <span class="container-class">.env-local-card-img</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">639 × 341</td>
+            <td class="recommend">1278 × 682</td>
+            <td><div class="filename">environment-local-4.jpg</div> <span class="container-class">.env-local-card-img</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">639 × 341</td>
+            <td class="recommend">1278 × 682</td>
+            <td><div class="filename">environment-local-5.jpg</div> <span class="container-class">.env-local-card-img</span> <span class="container-class">cover</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="page-section" id="transport.html">
+  <div class="page-title">
+    <span>交通資訊 <small style="opacity:0.7;font-size:13px;">(transport.html)</small></span>
+    <span class="badge">3 img ＋ 0 bg</span>
+  </div>
+  <div class="page-content">
+    <div class="page-screenshot">
+      <img src="transport.png" alt="交通資訊 截圖" onclick="this.classList.toggle('zoomed')">
+    </div>
+    <div class="page-table">
+      <table>
+        <thead>
+          <tr><th>#</th><th>類型</th><th>CSS 尺寸</th><th>建議 2x</th><th>詳情</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1840 × 400</td>
+            <td class="recommend">3680 × 800</td>
+            <td><div class="filename">transport-hero-bg.jpg</div> <span class="container-class">.page-hero-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">2036 × 837</td>
+            <td class="recommend">4072 × 1674</td>
+            <td><div class="filename">content-bg-bottom.jpg</div> <span class="container-class">.transport-map-view</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">640 × 853</td>
+            <td class="recommend">1280 × 1706</td>
+            <td><div class="filename">transport-building.jpg</div> <span class="container-class">.transport-left-img</span> <span class="container-class">cover</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="page-section" id="booking.html">
+  <div class="page-title">
+    <span>預約導覽 <small style="opacity:0.7;font-size:13px;">(booking.html)</small></span>
+    <span class="badge">3 img ＋ 0 bg</span>
+  </div>
+  <div class="page-content">
+    <div class="page-screenshot">
+      <img src="booking.png" alt="預約導覽 截圖" onclick="this.classList.toggle('zoomed')">
+    </div>
+    <div class="page-table">
+      <table>
+        <thead>
+          <tr><th>#</th><th>類型</th><th>CSS 尺寸</th><th>建議 2x</th><th>詳情</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1840 × 400</td>
+            <td class="recommend">3680 × 800</td>
+            <td><div class="filename">booking-hero-bg.jpg</div> <span class="container-class">.page-hero-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">640 × 960</td>
+            <td class="recommend">1280 × 1920</td>
+            <td><div class="filename">booking-tour-photo.jpg</div> <span class="container-class">.booking-tour-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">453 × 86</td>
+            <td class="recommend">906 × 172</td>
+            <td><div class="filename">booking-captcha.png</div> <span class="container-class">.booking-form-captcha</span> <span class="container-class">cover</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="page-section" id="careers.html">
+  <div class="page-title">
+    <span>人才招募 <small style="opacity:0.7;font-size:13px;">(careers.html)</small></span>
+    <span class="badge">7 img ＋ 0 bg</span>
+  </div>
+  <div class="page-content">
+    <div class="page-screenshot">
+      <img src="careers.png" alt="人才招募 截圖" onclick="this.classList.toggle('zoomed')">
+    </div>
+    <div class="page-table">
+      <table>
+        <thead>
+          <tr><th>#</th><th>類型</th><th>CSS 尺寸</th><th>建議 2x</th><th>詳情</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1840 × 400</td>
+            <td class="recommend">3680 × 800</td>
+            <td><div class="filename">careers-hero-bg.jpg</div> <span class="container-class">.page-hero-image</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">853 × 373</td>
+            <td class="recommend">1706 × 746</td>
+            <td><div class="filename">picture-bg.jpg</div> <span class="container-class">.careers-content-bg</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">853 × 400</td>
+            <td class="recommend">1706 × 800</td>
+            <td><div class="filename">careers-person.jpg</div> <span class="container-class">.careers-left-img</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1920 × 649</td>
+            <td class="recommend">3840 × 1298</td>
+            <td><div class="filename">content-bg-bottom.jpg</div> <span class="container-class">.careers-bottom-bg</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 295</td>
+            <td class="recommend">970 × 590</td>
+            <td><div class="filename">careers-gallery-1.jpg</div> <span class="container-class">.gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 295</td>
+            <td class="recommend">970 × 590</td>
+            <td><div class="filename">careers-gallery-2.jpg</div> <span class="container-class">.gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">485 × 295</td>
+            <td class="recommend">970 × 590</td>
+            <td><div class="filename">careers-gallery-3.jpg</div> <span class="container-class">.gallery-item</span> <span class="container-class">cover</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="page-section" id="privacy.html">
+  <div class="page-title">
+    <span>隱私政策 <small style="opacity:0.7;font-size:13px;">(privacy.html)</small></span>
+    <span class="badge">1 img ＋ 0 bg</span>
+  </div>
+  <div class="page-content">
+    <div class="page-screenshot">
+      <img src="privacy.png" alt="隱私政策 截圖" onclick="this.classList.toggle('zoomed')">
+    </div>
+    <div class="page-table">
+      <table>
+        <thead>
+          <tr><th>#</th><th>類型</th><th>CSS 尺寸</th><th>建議 2x</th><th>詳情</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><span class="tag tag-img">IMG</span></td>
+            <td class="size">1333 × 347</td>
+            <td class="recommend">2666 × 694</td>
+            <td><div class="filename">privacy-hero.jpg</div> <span class="container-class">.privacy-hero-image</span> <span class="container-class">cover</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>由 Playwright 自動產生 — 尺寸為頁面在 1920 × 1080 視窗下的 CSS 渲染尺寸</p>
+  <p>實際輸出圖片建議使用 <strong>2 倍解析度</strong>，以確保 Retina 螢幕清晰度</p>
+</footer>
+</body>
+</html>
